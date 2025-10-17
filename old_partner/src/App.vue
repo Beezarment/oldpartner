@@ -1,19 +1,19 @@
 <template>
   <v-app>
+    <Navbar />
     <v-main>
       <v-container>
-        <v-btn color="primary" @click="clic">Hello world</v-btn>
+        <router-view />
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Navbar from './components/Navbar.vue'
+
 export default {
-  methods: {
-    clic() {
-      alert('Bouton cliqué !')
-    }
-  }
+  name: 'App',
+  components: { Navbar }
 }
 </script>
