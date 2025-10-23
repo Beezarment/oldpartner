@@ -1,19 +1,32 @@
 <template>
   <v-app>
     <Navbar />
-    <v-main>
-      <v-container>
-        <router-view />
-      </v-container>
+    <v-main class="d-flex flex-column min-h-screen">
+      <router-view class="flex-grow-1" />
+      <Footer />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
-  components: { Navbar }
+  components: {
+    Navbar,
+    Footer
+  }
 }
 </script>
+
+<style>
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+</style>
+

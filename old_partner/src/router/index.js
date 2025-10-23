@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Navbar from '../components/Navbar.vue'
+import Footer from '../components/Footer.vue'
 import Home from '../front/Home.vue'
 import Catalogue from '../front/Catalogue.vue'
 import Product from '../front/Product.vue'
