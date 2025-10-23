@@ -2,7 +2,6 @@
   <v-footer
     color="transparent"
     padless
-    app
     class="footer"
   >
     <v-row no-gutters>
@@ -62,9 +61,9 @@
 
 <style scoped>
 .footer {
-  position: relative;
-  bottom: 0;
+  position: static;
   width: 100%;
+  margin-top: auto;
 }
 
 .footer-list {
