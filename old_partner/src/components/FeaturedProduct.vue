@@ -11,7 +11,6 @@
         cols="12" sm="6" md="4" lg="3"
       >
         <v-card elevation="4" class="rounded-xl position-relative">
-          <!-- Numéro en haut à gauche -->
           <div class="number-badge">
             {{ index + 1 }}
           </div>
