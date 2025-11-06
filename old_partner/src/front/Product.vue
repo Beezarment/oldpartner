@@ -127,4 +127,10 @@ export default {
   object-fit: cover !important;
   border-radius: 12px;
 }
+
+@media (max-width: 600px) {
+  .v-carousel {
+    height: 250px !important;
+  }
+}
 </style>

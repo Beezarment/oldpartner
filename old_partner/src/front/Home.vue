@@ -222,10 +222,14 @@ h2, h3 {
   font-size: 14px;
 }
 
-.product-image {
-  object-fit: cover !important;
-  object-position: center !important;
+@media (max-width: 600px) {
+  .product-image {
+    height: 220px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
 }
+
 
 .brand-card {
   border: 3px solid #e0d4c0; /* optionnel, petit contour rétro */

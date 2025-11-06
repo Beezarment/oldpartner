@@ -178,4 +178,9 @@ export default {
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
+
+.v-row {
+  row-gap: 16px;
+}
+
 </style>

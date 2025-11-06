@@ -115,6 +115,8 @@ const goTo = (link) => {
   max-width: 600px;
   flex: 1;
 }
+
+
 .text-brown-darken-4 {
   color: #4e342e !important;
 }
@@ -131,5 +133,6 @@ const goTo = (link) => {
   right: 0;
   z-index: 10;
 }
+
 
 </style>
