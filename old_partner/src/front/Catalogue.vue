@@ -62,7 +62,7 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="brown-darken-3" variant="flat" block>
+            <v-btn color="brown-darken-3" variant="flat" block rounded>
               Voir le produit
             </v-btn>
           </v-card-actions>
