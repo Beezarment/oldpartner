@@ -62,7 +62,13 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="brown-darken-3" variant="flat" block rounded>
+            <v-btn
+              color="brown-darken-3"
+              variant="flat"
+              block
+              rounded
+              :to="`/product/${product.id}`"
+            >
               Voir le produit
             </v-btn>
           </v-card-actions>
