@@ -99,9 +99,7 @@ const menuItems = [
   { text: 'Derniers arrivages', link: '/' },
   { text: 'Catégories', link: '/catalogue' },
   { text: 'Marques', link: '/marques' },
-  { text: 'Types de produits', link: '/types' },
-  { text: 'Vendre vos jouets', link: '/vendre' },
-  { text: 'Contact', link: '/contact' },
+  { text: 'Types de produits', link: '/productType' },
 ]
 
 const goTo = (link) => {
