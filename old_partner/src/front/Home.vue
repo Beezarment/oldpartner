@@ -232,7 +232,7 @@ h2, h3 {
 
 
 .brand-card {
-  border: 3px solid #e0d4c0; /* optionnel, petit contour rétro */
+  border: 3px solid #e0d4c0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
