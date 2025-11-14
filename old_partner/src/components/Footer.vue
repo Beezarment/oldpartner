@@ -1,41 +1,35 @@
 <template>
-  <v-footer
-    color="transparent"
-    padless
-    class="footer"
-  >
+  <v-footer color="transparent" padless class="footer">
     <v-row no-gutters>
-        <v-col
+      <v-col
         cols="12"
         md="9"
         class="footer-content"
         style="background-color: #4e342e; color: white; padding: 24px;"
-        >
+      >
+        <div class="footer-section">
+          <h4 class="text-subtitle-1 font-weight-bold mb-2">À propos :</h4>
+          <ul class="footer-list">
+            <li><v-btn variant="text" class="footer-link" @click="goTo({ name: 'Us' })">Qui sommes-nous ?</v-btn></li>
+            <li><v-btn variant="text" class="footer-link" @click="goTo({ name: 'Engagement' })">Nos engagements</v-btn></li>
+          </ul>
+        </div>
 
-            <div class="footer-section">
-            <h4 class="text-subtitle-1 font-weight-bold mb-2">À propos :</h4>
-            <ul class="footer-list">
-                <li><a href="#" class="footer-link">Qui sommes-nous ?</a></li>
-                <li><a href="#" class="footer-link">Nos engagements</a></li>
-            </ul>
-            </div>
+        <div class="footer-section">
+          <h4 class="text-subtitle-1 font-weight-bold mb-2">Services :</h4>
+          <ul class="footer-list">
+            <li><v-btn variant="text" class="footer-link" @click="goTo({ name: 'Payment' })">Paiements sécurisés</v-btn></li>
+            <li><v-btn variant="text" class="footer-link" @click="goTo({ name: 'Shipping' })">Livraisons</v-btn></li>
+          </ul>
+        </div>
 
-            <div class="footer-section">
-            <h4 class="text-subtitle-1 font-weight-bold mb-2">Services :</h4>
-            <ul class="footer-list">
-                <li><a href="#" class="footer-link">Paiements sécurisés</a></li>
-                <li><a href="#" class="footer-link">Vendez vos jouets</a></li>
-                <li><a href="#" class="footer-link">Livraisons</a></li>
-            </ul>
-            </div>
-
-            <div class="footer-section">
-            <h4 class="text-subtitle-1 font-weight-bold mb-2">Besoin d’aide ?</h4>
-            <ul class="footer-list">
-                <li><a href="#" class="footer-link">Nous contacter</a></li>
-            </ul>
-            </div>
-        </v-col>
+        <div class="footer-section">
+          <h4 class="text-subtitle-1 font-weight-bold mb-2">Besoin d’aide ?</h4>
+          <ul class="footer-list">
+            <li><v-btn variant="text" class="footer-link" @click="goTo({ name: 'Contact' })">Nous contacter</v-btn></li>
+          </ul>
+        </div>
+      </v-col>
 
       <v-col
         cols="12"
@@ -59,6 +53,16 @@
   </v-footer>
 </template>
 
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goTo = (path) => {
+  router.push(path)
+}
+</script>
+
 <style scoped>
 .footer {
   position: static;
@@ -73,14 +77,16 @@
 }
 
 .footer-link {
-  color: #e0e0e0;
-  text-decoration: none;
-  font-size: 0.9rem;
+  color: #e0e0e0 !important;
+  text-transform: none !important;
+  font-size: 0.9rem !important;
+  padding: 0 !important;
+  justify-content: flex-start !important;
 }
 
 .footer-link:hover {
   text-decoration: underline;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .footer-section {
@@ -98,6 +104,4 @@
   justify-content: flex-start;
   gap: 150px;
 }
-
-
 </style>
