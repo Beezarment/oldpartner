@@ -11,6 +11,8 @@ import Us from '../Legal/Us.vue'
 import Engagement from '../Legal/Engagement.vue'
 import Payment from '../Legal/Payment.vue'
 import Shipping from '../Legal/Shipping.vue'
+import Account from '../front/Account.vue'
+import wishlist from '../front/Wishlist.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -24,6 +26,8 @@ const routes = [
   { path: '/services/paiement', name: 'Payment', component:Payment},
   { path: '/services/livraison', name: 'Shipping', component: Shipping},
   { path: '/contact', name: 'Contact', component: Contact},
+  { path: '/account', name: 'Account', component: Account},
+  { path: '/wishlist', name: 'Wishlist', component: wishlist},
 ]
 
 
