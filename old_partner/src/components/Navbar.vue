@@ -37,10 +37,10 @@
           <v-btn icon variant="text">
             <v-img src="/langue.png" width="40" alt="Langue" />
           </v-btn>
-          <v-btn icon variant="text">
-            <v-img src="/wishlist.png" width="30" alt="Wishlist" />
+          <v-btn icon variant="text" @click="goTo('/wishlist')">
+            <v-img src="/wishlist.png" width="30" alt="Panier" />
           </v-btn>
-          <v-btn icon variant="text">
+          <v-btn icon variant="text" @click="goTo('/account')">
             <v-img src="/account.png" width="40" alt="Compte" />
           </v-btn>
         </div>
