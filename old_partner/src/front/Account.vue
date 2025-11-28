@@ -16,7 +16,7 @@
           </v-list-item>
         </v-list>
       </v-col>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="4" offset-md="1">
         <div v-if="selected === 'profile'">
           <h2 class="text-h5 font-weight-bold mb-4">Informations personnelles</h2>
           <v-text-field label="Nom" variant="outlined" density="comfortable" class="mb-4" />
