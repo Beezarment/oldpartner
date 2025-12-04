@@ -128,11 +128,6 @@ const goTo = (link) => {
   color: #4e342e !important;
 }
 
-.logo-text {
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
 .toolbar-menu {
   position: fixed;
   top: 70px;
@@ -141,9 +136,21 @@ const goTo = (link) => {
   z-index: 10;
 }
 
+.logo-desktop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 650px) {
   .logo-desktop {
     display: none !important;
   }
 }
+
+.logo-text {
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
 </style>
