@@ -1,10 +1,8 @@
 <template>
   <div>
-    <!-- NAVBAR -->
     <v-app-bar flat color="white" fixed height="70" elevation="1">
       <v-container class="d-flex align-center justify-space-between px-2" fluid>
 
-        <!-- LOGO (desktop only) -->
         <div class="logo-desktop">
           <v-img src="/tab_logo.png" alt="Old Partner Logo" height="90" width="90" />
           <span class="text-h4 text-brown-darken-4 logo-text">
@@ -12,7 +10,6 @@
           </span>
         </div>
 
-        <!-- BURGER MENU (mobile only) -->
         <v-btn
           icon
           variant="text"
@@ -23,7 +20,6 @@
         </v-btn>
 
 
-        <!-- SEARCH BAR -->
         <v-text-field
           v-model="search"
           class="search-bar mx-4"
@@ -37,7 +33,6 @@
           append-inner-icon="mdi-magnify"
         ></v-text-field>
 
-        <!-- DESKTOP ACTION BUTTONS -->
         <div class="d-none d-md-flex align-center">
           <v-btn icon variant="text">
             <v-img src="/langue.png" width="40" alt="Langue" />
@@ -53,7 +48,6 @@
       </v-container>
     </v-app-bar>
 
-    <!-- TOOLBAR DESKTOP -->
     <v-toolbar flat color="brown-darken-4" height="48" class="toolbar-menu d-none d-md-flex">
       <v-container class="d-flex justify-center">
         <v-btn
@@ -68,7 +62,6 @@
       </v-container>
     </v-toolbar>
 
-    <!-- MOBILE DRAWER -->
     <v-navigation-drawer
       v-model="drawerRight"
       location="right"
@@ -76,7 +69,6 @@
       width="220"
     >
       <v-list>
-        <!-- Mobile action buttons -->
         <v-list-item>
           <v-btn icon variant="text">
             <v-img src="/langue.png" width="40" alt="Langue" />
@@ -91,7 +83,6 @@
 
         <v-divider class="my-2"></v-divider>
 
-        <!-- MENU ITEMS -->
         <v-list-item
           v-for="item in menuItems"
           :key="item.text"
@@ -102,7 +93,6 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- Spacer -->
     <div style="height: 118px;"></div>
   </div>
 </template>
