@@ -16,7 +16,7 @@
           class="d-flex d-md-none burger-mobile"
           @click="drawerRight = true"
         >
-          <v-icon>mdi-menu</v-icon>
+          <Menu size="32" class="text-brown-darken-4" />
         </v-btn>
 
 
@@ -100,7 +100,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
+import { Menu } from 'lucide-vue-next';
 const search = ref('')
 const drawerRight = ref(false)
 const router = useRouter()
