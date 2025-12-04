@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../front/Home.vue'
 import Catalogue from '../front/Catalogue.vue'
 import ProductPage from '../front/ProductPage.vue'
-import Cart from '../front/Panier.vue'
 import BrandPage from '../front/BrandPage.vue'
 import ProductType from '../front/ProductType.vue'
 import Contact from '../Legal/Contact.vue'
@@ -20,7 +19,6 @@ const routes = [
   { path: '/product/:id', name: 'Product', component: ProductPage, props: true, },
   { path: '/marques', name: 'BrandPage', component: BrandPage, props: true, },
   { path: '/productType', name: 'ProductType', component: ProductType, props: true, },
-  { path: '/cart', name: 'Cart', component: Cart },
   { path: '/legal/us', name: 'Us', component: Us},
   { path: '/legal/engagements', name: 'Engagement', component: Engagement},
   { path: '/services/paiement', name: 'Payment', component:Payment},
