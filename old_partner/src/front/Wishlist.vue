@@ -31,7 +31,7 @@
       </v-col>
     </v-row>
 
-    <v-alert v-else type="info" class="mt-6">Aucun article dans ta wishlist pour le moment.</v-alert>
+    <v-alert v-else type="info" color="#4a3a2a" class="mt-6">Aucun article dans ta wishlist pour le moment.</v-alert>
   </v-container>
 </template>
 

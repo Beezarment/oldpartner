@@ -1,137 +1,65 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-sheet color="#f2d7b3" class="py-16 text-center ma-0">
-      <h2 class="text-h5 font-weight-medium mb-2">
-        Revivez votre enfance une nouvelle fois avec vos anciens partenaires de jeux.
-      </h2>
-    </v-sheet>
+  <v-sheet color="#f2d7b3" class="py-16 text-center ma-0" height="auto" style="margin-top: -118px;">
+    <h2 class="text-h5 font-weight-medium mb-2">
+      Revivez votre enfance avec vos anciens partenaires de jeux.
+    </h2>
+  </v-sheet>
 
     <v-container class="mt-10">
-      <h3 class="text-h6 mb-6 text-brown-darken-4">Produits en vedette</h3>
-      <v-row justify="center" align="stretch" dense>
-        <v-col
-          v-for="(product, index) in featuredProducts"
-          :key="product.id"
-          cols="12" sm="6" md="4" lg="3"
-        >
-          <v-card elevation="4" class="rounded-xl position-relative">
-            <div class="number-badge">
-              {{ index + 1 }}
-            </div>
-
-            <v-img
-              :src="product.image"
-              height="200"
-              cover
-            ></v-img>
-
-            <v-card-title class="text-truncate">
-              {{ product.name }}
-            </v-card-title>
-
-            <v-card-subtitle class="text-brown-darken-4 font-weight-bold">
-              {{ product.price.toFixed(2) }} €
-            </v-card-subtitle>
-
-            <v-card-text class="text-grey-darken-1 text-body-2">
-              {{ product.description }}
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn
-                color="brown-darken-3"
-                variant="flat"
-                block
-                rounded
-                :to="`/product/${product.id}`"
-              >
-                Voir le produit
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+      <h1 class="text-h7 mb-6 text-brown-darken-4">Produits en vedette</h1>
+        <v-row justify="center" align="stretch" dense>
+          <ProductCard
+            v-for="(product, index) in featuredProducts"
+            :key="product.id"
+            :product="product"
+            :index="index"
+            :showBadge="true"
+          />
+        </v-row>
     </v-container>
 
     <v-container class="mt-12">
-      <h3 class="text-h6 mb-6 text-brown-darken-4">Dernières arrivées</h3>
-      <v-row>
-        <v-col
+      <h1 class="text-h7 mb-6 text-brown-darken-4">Dernières arrivées</h1>
+
+      <v-row justify="center" align="stretch" class="g-4" dense>
+        <ProductCard
           v-for="product in latestArrivals"
           :key="product.id"
-          cols="12" sm="6" md="4"
-        >
-          <v-card elevation="3" class="rounded-xl overflow-hidden">
-            <v-img
-              :src="product.image"
-              height="600"
-              class="product-image"
-              cover
-            ></v-img>
-
-            <v-card-title class="text-truncate">{{ product.name }}</v-card-title>
-
-            <v-card-subtitle class="text-brown-darken-4 font-weight-bold">
-              {{ product.price.toFixed(2) }} €
-            </v-card-subtitle>
-          </v-card>
-        </v-col>
+          :product="product"
+          :height="500"
+          md="4"
+          lg="4"
+        />
       </v-row>
     </v-container>
 
-
     <v-container class="mt-12">
-      <h3 class="text-h6 mb-6 text-brown-darken-4">Types de produits</h3>
-      <v-row>
-        <v-col
-          v-for="type in productTypes"
-          :key="type.name"
-          cols="12" sm="6" md="4"
-        >
-          <v-sheet
-            height="150"
-            class="d-flex align-center justify-center bg-brown-lighten-5 rounded-xl"
-          >
-            <span class="text-brown-darken-4 font-weight-medium">{{ type.name }}</span>
-          </v-sheet>
-        </v-col>
-      </v-row>
+      <h1 class="text-h7 mb-6 text-brown-darken-4">Types de produits</h1>
+      <ProductTypeGrid :types="productTypes" />
     </v-container>
 
     <v-container class="mt-12 mb-10">
-      <h3 class="text-h6 mb-6 text-brown-darken-4">Marques</h3>
-      <v-row justify="center">
-        <v-col
-          v-for="brand in brands"
-          :key="brand.id"
-          cols="6" sm="3"
-          class="d-flex justify-center"
-        >
-          <v-card
-            height="160"
-            width="160"
-            class="overflow-hidden rounded-circle elevation-3 brand-card"
-          >
-            <v-img
-              :src="brand.logo"
-              alt="Logo marque"
-              height="100%"
-              width="100%"
-              cover
-              class="brand-image"
-            />
-          </v-card>
-        </v-col>
-      </v-row>
+      <h1 class="text-h7 mb-6 text-brown-darken-4">Marques</h1>
+      <CircleBrand :brands="brands" />
     </v-container>
 
   </v-container>
 </template>
 
 <script>
+import CircleBrand from '../components/CircleBrand.vue'
+import ProductTypeGrid from '../components/RectangleType.vue'
+import ProductCard from '../components/FeaturedProduct.vue'
+import PromoProduct from '../components/PromoProduct.vue'
 
 export default {
   name: "Home",
+  components: {
+    CircleBrand,
+    ProductTypeGrid,
+    ProductCard
+  },
   data() {
     return {
       featuredProducts: [
@@ -204,46 +132,4 @@ export default {
 h2, h3 {
   color: #4a3a2a;
 }
-
-.number-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: #ff7043;
-  color: white;
-  font-weight: bold;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
-}
-
-@media (max-width: 600px) {
-  .product-image {
-    height: 220px !important;
-    object-fit: cover !important;
-    object-position: center !important;
-  }
-}
-
-
-.brand-card {
-  border: 3px solid #e0d4c0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.brand-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.brand-image {
-  object-fit: cover !important;
-  object-position: center !important;
-}
-
 </style>

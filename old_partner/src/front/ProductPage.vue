@@ -3,23 +3,7 @@
     <v-row>
 
       <v-col cols="12" md="6">
-        <v-carousel
-          hide-delimiter-background
-          height="400"
-          cycle
-          show-arrows="hover"
-        >
-          <v-carousel-item
-            v-for="(image, i) in product.images"
-            :key="i"
-          >
-            <v-img
-              :src="image"
-              class="product-image"
-              cover
-            ></v-img>
-          </v-carousel-item>
-        </v-carousel>
+        <ImageCarousel :images="product.images" :height="500" show-arrows="always" />
       </v-col>
 
       <v-col cols="12" md="6" class="d-flex flex-column justify-center">
@@ -54,10 +38,10 @@
         </div>
       </v-col>
     </v-row>
+
     <v-divider class="my-10"></v-divider>
 
     <h3 class="text-h6 text-brown-darken-4 mb-4">Avis :</h3>
-
     <v-row>
       <v-col
         v-for="review in reviews"
@@ -87,9 +71,11 @@
 
 <script>
 import { useRoute } from 'vue-router'
+import ImageCarousel from '../components/Carousel.vue'
 
 export default {
   name: "Product",
+  components: { ImageCarousel },
   data() {
     return {
       products: [
@@ -97,29 +83,48 @@ export default {
           id: 1,
           name: "Figurine Marvel Collector",
           price: 79.99,
-          brandLogo: "/images/logo-marvel.png",
+          brandLogo: "logo-marvel.jpeg",
           description: "Figurine Marvel édition spéciale.",
-          images: ["/images/marvel-figurine.jpg"],
+          images: ["ferrari.jpg"], 
         },
         {
           id: 2,
           name: "Set LEGO Star Wars",
           price: 59.9,
-          brandLogo: "/images/logo-lego.png",
+          brandLogo: "logo-lego.png",
           description: "Pour les fans de la saga galactique.",
           images: ["gameboy.jpg"],
         },
       ],
       product: null,
+      reviews: [
+        {
+          id: 1,
+          name: "Alice",
+          title: "Super produit !",
+          comment: "Très satisfait de mon achat, la qualité est top !"
+        },
+        {
+          id: 2,
+          name: "Bob",
+          title: "Bon rapport qualité-prix",
+          comment: "Le produit correspond parfaitement à la description."
+        },
+        {
+          id: 3,
+          name: "Charlie",
+          title: "Livraison rapide",
+          comment: "Reçu en 2 jours, emballage impeccable."
+        }
+      ]
     };
   },
   created() {
     const route = useRoute();
     const id = parseInt(route.params.id);
-    this.product = this.products.find((p) => p.id === id) || this.products[0];
-  },
+    this.product = this.products.find(p => p.id === id) || this.products[0];
+  }
 };
-
 </script>
 
 <style scoped>
