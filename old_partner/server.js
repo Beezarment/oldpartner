@@ -2,9 +2,9 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { PrismaClient } from '@prisma/client'
+import authRoutes from './routes/auth.routes.js'
 
 const prisma = new PrismaClient()
-
 const app = express()
 const PORT = 3000
 
@@ -18,20 +18,11 @@ app.get('/api/toys', async (req, res) => {
     const toys = await prisma.product.findMany()
     res.json(toys)
   } catch (err) {
-    console.error(err)
     res.status(500).json({ error: 'Erreur lors de la récupération des jouets' })
   }
 })
 
-app.post('/api/users', async (req, res) => {
-  const { email, password } = req.body
-  const user = await prisma.user.create({
-    data: { email, password }
-  })
-  res.json(user)
-})
-
-app.get('/api/figurine', (req, res) => res.json({ message: 'Route test fonctionne 🎉' }))
+app.use('/api/auth', authRoutes)
 
 app.get('/', (req, res) => {
   res.send('Bienvenue sur le serveur Express du site de jouets !')
