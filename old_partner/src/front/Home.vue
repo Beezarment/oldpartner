@@ -54,77 +54,35 @@ import ProductCard from '../components/FeaturedProduct.vue'
 import PromoProduct from '../components/PromoProduct.vue'
 
 export default {
-  name: "Home",
-  components: {
-    CircleBrand,
-    ProductTypeGrid,
-    ProductCard
-  },
+  components: { CircleBrand, ProductTypeGrid, ProductCard },
   data() {
     return {
-      featuredProducts: [
-        {
-          id: 1,
-          name: "Figurine Marvel",
-          description: "Collection exclusive limitée.",
-          price: 39.99,
-          image: "/images/marvel-figurine.jpg",
-        },
-        {
-          id: 2,
-          name: "Set LEGO Star Wars",
-          description: "Pour les fans de la saga galactique.",
-          price: 59.9,
-          image: "/images/lego-sw.jpg",
-        },
-        {
-          id: 3,
-          name: "Batman Collector",
-          description: "Édition spéciale vintage.",
-          price: 79.5,
-          image: "/images/dc-batman.jpg",
-        },
-        {
-          id: 4,
-          name: "Peluche rétro 90's",
-          description: "Douce et nostalgique.",
-          price: 24.99,
-          image: "/images/old-teddy.jpg",
-        },
-      ],
-      latestArrivals: [
-        {
-          id: 5,
-          name: "Maquette Ferrari 1980",
-          price: 44.99,
-          image: "ferrari.jpg",
-        },
-        {
-          id: 6,
-          name: "Jeu GameBoy Color",
-          price: 69.9,
-          image: "gameboy.jpg",
-        },
-        {
-          id: 7,
-          name: "Transformers édition 90s",
-          price: 54.5,
-          image: "transformer.jpg",
-        },
-      ],
-      productTypes: [
-        { name: "Figurines" },
-        { name: "Maquettes" },
-        { name: "Peluches" },
-      ],
-      brands: [
-        { id: 1, logo: "logo-marvel.jpeg" },
-        { id: 2, logo: "logo-lego.png" },
-        { id: 3, logo: "logo-dc.png" },
-        { id: 4, logo: "logo-bandai.png" },
-      ],
-    };
+      products: [],
+      productTypes: [],
+      brands: [],
+    }
   },
+  async mounted() {
+    const [productsRes, typesRes, brandsRes] = await Promise.all([
+      fetch('http://localhost:3000/api/products'),
+      fetch('http://localhost:3000/api/product-types'),
+      fetch('http://localhost:3000/api/brands'),
+    ])
+
+    this.products = await productsRes.json()
+    this.productTypes = await typesRes.json()
+    this.brands = await brandsRes.json()
+  },
+  computed: {
+    featuredProducts() {
+      return this.products.slice(0, 4)
+    },
+    latestArrivals() {
+      return [...this.products]
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 3)
+    }
+  }
 };
 </script>
 

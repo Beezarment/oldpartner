@@ -1,7 +1,6 @@
 <template>
-  <v-container class="py-10">
+  <v-container v-if="product" class="py-10">
     <v-row>
-
       <v-col cols="12" md="6">
         <ImageCarousel :images="product.images" :height="500" show-arrows="always" />
       </v-col>
@@ -10,11 +9,11 @@
         <div>
           <v-img
             :src="product.brandLogo"
-            alt="Logo marque"
             height="60"
             contain
             class="mb-3"
           />
+
           <h2 class="text-h5 font-weight-bold mb-2">{{ product.name }}</h2>
 
           <p class="text-success font-weight-medium mb-1">EN STOCK</p>
@@ -22,25 +21,17 @@
             PRIX : {{ product.price.toFixed(2) }} €
           </p>
 
-          <v-btn
-            color="brown-darken-3"
-            class="mb-6"
-            rounded
-            block
-            size="large"
-          >
-            AJOUTER AU PANIER
+          <v-btn color="brown-darken-3" block rounded>
+            AJOUTER À LA WISHLIST
           </v-btn>
 
-          <p class="text-body-2 text-grey-darken-2">
+          <p class="mt-4 text-grey-darken-2">
             {{ product.description }}
           </p>
         </div>
       </v-col>
     </v-row>
-
     <v-divider class="my-10"></v-divider>
-
     <h3 class="text-h6 text-brown-darken-4 mb-4">Avis :</h3>
     <v-row>
       <v-col
@@ -67,35 +58,17 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <v-container v-else class="text-center py-10">
+    <v-progress-circular indeterminate />
+  </v-container>
 </template>
 
 <script>
-import { useRoute } from 'vue-router'
-import ImageCarousel from '../components/Carousel.vue'
-
 export default {
   name: "Product",
-  components: { ImageCarousel },
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          name: "Figurine Marvel Collector",
-          price: 79.99,
-          brandLogo: "logo-marvel.jpeg",
-          description: "Figurine Marvel édition spéciale.",
-          images: ["ferrari.jpg"], 
-        },
-        {
-          id: 2,
-          name: "Set LEGO Star Wars",
-          price: 59.9,
-          brandLogo: "logo-lego.png",
-          description: "Pour les fans de la saga galactique.",
-          images: ["gameboy.jpg"],
-        },
-      ],
       product: null,
       reviews: [
         {
@@ -117,25 +90,18 @@ export default {
           comment: "Reçu en 2 jours, emballage impeccable."
         }
       ]
-    };
+    }
   },
-  created() {
-    const route = useRoute();
-    const id = parseInt(route.params.id);
-    this.product = this.products.find(p => p.id === id) || this.products[0];
+  async created() {
+    const id = this.$route.params.id
+
+    try {
+      const res = await fetch(`http://localhost:3000/api/products/${id}`)
+      if (!res.ok) throw new Error()
+      this.product = await res.json()
+    } catch {
+      this.$router.push({ name: "Catalogue" })
+    }
   }
-};
+}
 </script>
-
-<style scoped>
-.product-image {
-  object-fit: cover !important;
-  border-radius: 12px;
-}
-
-@media (max-width: 600px) {
-  .v-carousel {
-    height: 250px !important;
-  }
-}
-</style>
