@@ -1,28 +1,31 @@
 <template>
   <div class="pa-6">
     <h1 class="mb-6">Types de produits</h1>
-    <CategoryList :categories="types" />
+    <CategoryList
+      :categories="types.map(t => ({
+        title: t.name,
+        image: t.image,
+        redirectParam: t.name
+      }))"
+    />
   </div>
 </template>
 
 <script>
-import CategoryList from '../components/PresentationCard.vue'
+import CategoryList from '../components/CategoryList.vue'
 
 export default {
-  name: "BrandPage",
-  components: {
-    CategoryList
-  },
+  name: "ProductTypePage",
+  components: { CategoryList },
   data() {
-    const types = [
-      { name: "Figurines", logo: "/images/types/figurine.png", slug: "figurines" },
-      { name: "Maquettes", logo: "/images/types/maquette.png", slug: "maquettes" },
-      { name: "Comics", logo: "/images/types/comics.png", slug: "comics" },
-      { name: "Accessoires", logo: "/images/types/accessoire.png", slug: "accessoires" },
-    ]
-    return {
-      types
-    }
+    return { productTypes: [] }
+  },
+  async mounted() {
+    const res = await fetch('http://localhost:3000/api/product-types')
+    this.productTypes = await res.json()
+  },
+  computed: {
+    types() { return this.productTypes }
   }
 }
 </script>
