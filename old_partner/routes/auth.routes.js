@@ -19,7 +19,8 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' })
     res.json({ token })
   } catch (err) {
-    res.status(400).json({ error: 'Utilisateur déjà existant' })
+    console.error("Erreur Prisma :", err)
+    res.status(500).json({ error: 'Erreur serveur, check la console' })
   }
 })
 
@@ -27,18 +28,21 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await prisma.user.findUnique({ where: { email } })
-    if (!user) return res.status(401).json({ error: 'Identifiants invalides' })
-
+    if (!user) {
+      return res.status(401).json({ error: 'Identifiants invalides' })
+    }
     const isValid = await bcrypt.compare(password, user.password)
-    if (!isValid) return res.status(401).json({ error: 'Identifiants invalides' })
-
+    if (!isValid) {
+      return res.status(401).json({ error: 'Identifiants invalides' })
+    }
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' })
     res.json({ token })
   } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Erreur serveur interne' })
+    console.error("Erreur Prisma :", err)
+    res.status(500).json({ error: 'Erreur serveur, check la console' })
   }
 })
+
 
 
 function authMiddleware(req, res, next) {

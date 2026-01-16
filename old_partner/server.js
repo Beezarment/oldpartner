@@ -1,28 +1,32 @@
 import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { PrismaClient } from '@prisma/client'
+import cors from 'cors'
 import authRoutes from './routes/auth.routes.js'
+import productRoutes from './routes/product.routes.js'
+import brandRoutes from './routes/brand.routes.js'
+import productTypeRoutes from './routes/productType.routes.js'
+import wishlistRoutes from './routes/wishlist.routes.js'
+import userRoutes from './routes/user.routes.js'
 
-const prisma = new PrismaClient()
+
+
+
 const app = express()
 const PORT = 3000
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+app.use(cors({
+  origin: 'http://localhost:5174',
+  credentials: true
+}))
 
 app.use(express.json())
 
-app.get('/api/toys', async (req, res) => {
-  try {
-    const toys = await prisma.product.findMany()
-    res.json(toys)
-  } catch (err) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des jouets' })
-  }
-})
-
+app.use(express.json())
 app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/brands', brandRoutes)
+app.use('/api/product-types', productTypeRoutes)
+app.use('/api/wishlist', wishlistRoutes)
 
 app.get('/', (req, res) => {
   res.send('Bienvenue sur le serveur Express du site de jouets !')

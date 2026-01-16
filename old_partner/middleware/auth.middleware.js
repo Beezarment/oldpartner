@@ -20,11 +20,4 @@ export function authMiddleware(req, res, next) {
   }
 }
 
-router.get('/me', authMiddleware, async (req, res) => {
-  const user = await prisma.user.findUnique({
-    where: { id: req.userId },
-    select: { id: true, email: true, createdAt: true }
-  })
 
-  res.json(user)
-})

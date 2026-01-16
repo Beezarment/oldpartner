@@ -7,18 +7,115 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   password  String
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+
+  reviews   Review[]
+  wishlist  Wishlist?
+  orders    Order[]
 }
 
+
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  price       Float
-  imageUrl    String
-  createdAt   DateTime @default(now())
+  id            Int          @id @default(autoincrement())
+  name          String
+  description   String
+  price         Float
+  imageUrl      String
+  createdAt     DateTime     @default(now())
+
+  brandId       Int
+  typeId        Int
+
+  brand         Brand        @relation(fields: [brandId], references: [id])
+  type          ProductType  @relation(fields: [typeId], references: [id])
+
+  reviews       Review[]
+  wishlistItems WishlistItem[]
+  orderItems    OrderItem[]
 }
+
+
+model Brand {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+
+  products  Product[]
+}
+
+
+model ProductType {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+
+  products  Product[]
+}
+
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  userId    Int
+  productId Int
+
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+}
+
+
+model Wishlist {
+  id     Int    @id @default(autoincrement())
+  userId Int    @unique
+
+  user   User   @relation(fields: [userId], references: [id])
+  items  WishlistItem[]
+}
+
+
+model WishlistItem {
+  id         Int @id @default(autoincrement())
+  wishlistId Int
+  productId  Int
+
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([wishlistId, productId])
+}
+
+
+model Order {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  status    String
+
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id])
+
+  items     OrderItem[]
+}
+
+
+model OrderItem {
+  id        Int @id @default(autoincrement())
+  quantity  Int
+  price     Float
+
+  orderId   Int
+  productId Int
+
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
