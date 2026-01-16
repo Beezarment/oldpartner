@@ -1,29 +1,31 @@
 <template>
   <div class="pa-6">
     <h1 class="mb-6">Marques</h1>
-    <CategoryList :categories="marques" />
+    <CategoryList
+      :categories="marques.map(b => ({
+        title: b.name,
+        image: b.image,
+        redirectParam: b.name
+      }))"
+    />
   </div>
 </template>
 
 <script>
-import CategoryList from '../components/PresentationCard.vue'
+import CategoryList from '../components/CategoryList.vue'
 
 export default {
   name: "BrandPage",
-  components: {
-    CategoryList
-  },
+  components: { CategoryList },
   data() {
-    const marques = [
-      { name: "Lego", logo: "/images/marques/lego.png", slug: "lego" },
-      { name: "Hasbro", logo: "/images/marques/hasbro.png", slug: "hasbro" },
-      { name: "Mattel", logo: "/images/marques/mattel.png", slug: "mattel" },
-      { name: "Bandai", logo: "/images/marques/bandai.png", slug: "bandai" },
-    ]
-    return {
-      marques
-    }
+    return { brands: [] }
+  },
+  async mounted() {
+    const res = await fetch('http://localhost:3000/api/brands')
+    this.brands = await res.json()
+  },
+  computed: {
+    marques() { return this.brands }
   }
 }
 </script>
-
