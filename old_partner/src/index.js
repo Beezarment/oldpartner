@@ -13,6 +13,7 @@ import Shipping from './Legal/Shipping.vue'
 import Account from './front/Account.vue'
 import Wishlist from './front/Wishlist.vue'
 import Login from './front/Login.vue'
+import Register from './front/Register.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -27,6 +28,7 @@ const routes = [
   { path: '/contact', name: 'Contact', component: Contact },
 
   { path: '/login', name: 'Login', component: Login },
+  { path: '/register', name: 'Register', component: Register },
 
   { path: '/account', name: 'Account', component: Account, meta: { requiresAuth: true } },
   { path: '/wishlist', name: 'Wishlist', component: Wishlist, meta: { requiresAuth: true } },
